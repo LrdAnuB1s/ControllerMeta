@@ -12,17 +12,6 @@
     </h1>
 
     <div class="flex flex-col gap-6 pb-4">
-      <!-- ── Language ─────────────────────────────────────────── -->
-      <section class="cs-card flex items-center justify-between">
-        <h3 class="text-base font-semibold text-(--cs-text-primary)">{{ $t('language') }}</h3>
-        <div class="flex bg-(--cs-bg-primary) p-1 rounded-lg border border-(--cs-border)">
-          <button @click="setLocale('en')" class="px-4 py-2 rounded-md text-sm font-medium transition-all"
-            :class="$i18n.locale === 'en' ? 'bg-(--cs-accent-blue) text-white shadow-sm' : 'text-(--cs-text-secondary) hover:text-(--cs-text-primary)'">English</button>
-          <button @click="setLocale('zh')" class="px-4 py-2 rounded-md text-sm font-medium transition-all"
-            :class="$i18n.locale === 'zh' ? 'bg-(--cs-accent-blue) text-white shadow-sm' : 'text-(--cs-text-secondary) hover:text-(--cs-text-primary)'">中文</button>
-        </div>
-      </section>
-
       <!-- ── UI Theme ──────────────────────────────────────────── -->
       <section class="cs-card flex items-center justify-between">
         <h3 class="text-base font-semibold text-(--cs-text-primary)">{{ $t('settings_theme') }}</h3>
@@ -381,7 +370,7 @@ import { ref, inject, onMounted, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useTheme, loadTheme, applyTheme, saveTheme } from '../utils/themeManager'
 
-const { locale, t } = useI18n()
+const { t } = useI18n()
 const currentTheme = ref('dark')
 const fileInput = ref(null)
 
@@ -499,11 +488,6 @@ onMounted(() => {
     )
   }
 })
-
-function setLocale(lang) {
-  locale.value = lang
-  try { localStorage.setItem('user-locale', lang) } catch (e) { console.error(e) }
-}
 
 function setTheme(theme) {
   currentTheme.value = theme
